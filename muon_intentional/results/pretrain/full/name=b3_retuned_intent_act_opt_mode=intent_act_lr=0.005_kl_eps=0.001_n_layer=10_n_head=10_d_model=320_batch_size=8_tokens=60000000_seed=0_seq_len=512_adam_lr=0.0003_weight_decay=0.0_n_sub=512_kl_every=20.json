@@ -1,0 +1,61 @@
+{
+ "status": "done",
+ "cfg": {
+  "name": "b3_retuned_intent_act",
+  "opt_mode": "intent_act",
+  "lr": 0.005,
+  "adam_lr": 0.0003,
+  "momentum": 0.95,
+  "nesterov": true,
+  "weight_decay": 0.0,
+  "alpha_clip_ratio": 20.0,
+  "n_layer": 10,
+  "n_head": 10,
+  "d_model": 320,
+  "seq_len": 512,
+  "batch_size": 8,
+  "tokens": 60000000,
+  "warmup_frac": 0.02,
+  "lr_schedule": "cosine",
+  "seed": 0,
+  "data_path": "/home/15Cu2Plus/muon_intentional/data/climbmix_400m.u16",
+  "out_dir": "/home/15Cu2Plus/muon_intentional/results/pretrain/full",
+  "log_every": 1000000000,
+  "eval_every": 1000000000,
+  "n_sub": 512,
+  "kl_every": 20,
+  "kl_probe_seqs": 2,
+  "kl_eps": 0.001,
+  "kl_check_every": 0
+ },
+ "num_params": {
+  "total": 29400960,
+  "embedding": 16082240,
+  "non_embedding": 13318720
+ },
+ "last_kl_diag": {},
+ "final_val_loss": 4.399925231933594,
+ "wall_sec": 1062.7090275287628,
+ "tokens_per_sec": 56457.79460396662,
+ "history": [
+  {
+   "step": 0,
+   "loss": 10.84248161315918,
+   "lr": 1.7123287671232875e-05,
+   "grad_norm": 8.62868595123291,
+   "tokens": 0,
+   "elapsed": 0.07516288757324219,
+   "rel_delta_h": {
+    "blocks": 1.712328776193317e-05
+   },
+   "rel_delta_h_spread": 0.9999998807907104,
+   "alpha_med": 6.82192239764845e-06,
+   "alpha_spread": 6.323805809020996
+  },
+  {
+   "val_loss": 4.399925231933594,
+   "step": 14648,
+   "tokens": 59998208
+  }
+ ]
+}

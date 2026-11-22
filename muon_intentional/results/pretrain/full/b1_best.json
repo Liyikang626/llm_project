@@ -1,0 +1,8 @@
+{
+ "adamw": 0.0006,
+ "muon": 0.01,
+ "orscale": 0.01,
+ "intent_act": 0.01,
+ "intent_kl_global": 0.002,
+ "intent_kl_layer": 0.002
+}

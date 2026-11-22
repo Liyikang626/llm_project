@@ -1,0 +1,73 @@
+{
+ "status": "done",
+ "cfg": {
+  "name": "b1_intent_kl_layer",
+  "opt_mode": "intent_kl_layer",
+  "lr": 0.02,
+  "adam_lr": 0.0003,
+  "momentum": 0.95,
+  "nesterov": true,
+  "weight_decay": 0.0,
+  "alpha_clip_ratio": 20.0,
+  "n_layer": 6,
+  "n_head": 6,
+  "d_model": 384,
+  "seq_len": 512,
+  "batch_size": 32,
+  "tokens": 15000000,
+  "warmup_frac": 0.02,
+  "lr_schedule": "cosine",
+  "seed": 0,
+  "data_path": "/home/15Cu2Plus/muon_intentional/data/climbmix_400m.u16",
+  "out_dir": "/home/15Cu2Plus/muon_intentional/results/pretrain/full",
+  "log_every": 1000000000,
+  "eval_every": 1000000000,
+  "n_sub": 512,
+  "kl_every": 20,
+  "kl_probe_seqs": 2,
+  "kl_eps": 3e-05,
+  "kl_check_every": 200
+ },
+ "num_params": {
+  "total": 30805248,
+  "embedding": 19298688,
+  "non_embedding": 11506560
+ },
+ "last_kl_diag": {
+  "mode": "layerwise",
+  "n": 42,
+  "eps_l": 4.927305194570218e-10,
+  "s_sum": 904.9669747427106,
+  "s_max": 136.54116821289062,
+  "s_min": 0.05433351546525955,
+  "eta_med": 8.416145647061057e-06,
+  "eta_spread": 50.13002395629883,
+  "frac_capped": 0.0,
+  "kl_additive": 2.0694681817194917e-08,
+  "kl_sum_measured": 6.41001776102712e-08,
+  "kl_before_calib": 4.3032216012761637e-07,
+  "calib_scale": 0.24218422160470374,
+  "calib_exponent": 8.0,
+  "kl_after_calib": 2.124847142681574e-08,
+  "kl_achieved_ratio": 1.0267599963368699
+ },
+ "final_val_loss": 5.4790544509887695,
+ "wall_sec": 72.53831744194031,
+ "tokens_per_sec": 206668.15179438217,
+ "history": [
+  {
+   "step": 0,
+   "loss": 10.864253997802734,
+   "lr": 0.0011111111111111111,
+   "grad_norm": 4.744114398956299,
+   "tokens": 0,
+   "elapsed": 0.0665276050567627,
+   "kl_diag": {}
+  },
+  {
+   "val_loss": 5.4790544509887695,
+   "step": 915,
+   "tokens": 14991360
+  }
+ ]
+}
