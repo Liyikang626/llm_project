@@ -49,7 +49,8 @@ muon_intentional/
 │   └── run_notebook.py     # 逐 cell 执行 notebook 的测试外壳
 ├── docs/
 │   ├── literature_review.md   # 已有工作与缝隙（含链接）
-│   └── experiment_plan.md     # 预算、并发、判据
+│   ├── experiment_plan.md     # 预算、并发、判据
+│   └── feishu_notes.md        # 飞书实验笔记（原始记录整理）
 ├── notebooks/              # 两个交付 notebook 的副本（原文件在 ~/）
 ├── data/                   # GSM8K 与 ClimbMix token 缓存（自动生成，不入库）
 └── results/                # 每个配置一个 JSON，可断点续跑
