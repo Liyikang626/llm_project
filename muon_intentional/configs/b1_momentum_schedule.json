@@ -1,0 +1,49 @@
+{
+  "name": "b1-momentum-schedule",
+  "training": {
+    "opt_mode": "muon",
+    "lr": 0.01,
+    "nesterov": true,
+    "adam_lr": 0.0003,
+    "weight_decay": 0.0,
+    "n_layer": 6,
+    "n_head": 6,
+    "d_model": 384,
+    "seq_len": 512,
+    "batch_size": 32,
+    "tokens": 15000000,
+    "warmup_frac": 0.02,
+    "lr_schedule": "cosine",
+    "eval_every": 100,
+    "log_every": 50
+  },
+  "data": {
+    "path": "~/storage/llm_project/data/climbmix_400m.u16",
+    "source": "/mnt/oss/datasets/climbmix/part_0.tokenized.jsonl",
+    "cache_tokens": 400000000,
+    "validation_fraction": 0.01,
+    "tokenizer": "GPT-2"
+  },
+  "output": "~/storage/llm_project/momentum_schedule",
+  "seeds": [
+    0,
+    1
+  ],
+  "schedules": {
+    "slow": {
+      "initial_steps": 40,
+      "initial_beta": 0.95,
+      "final_beta": 0.95
+    },
+    "fast": {
+      "initial_steps": 40,
+      "initial_beta": 0.8,
+      "final_beta": 0.8
+    },
+    "switch40": {
+      "initial_steps": 40,
+      "initial_beta": 0.95,
+      "final_beta": 0.8
+    }
+  }
+}

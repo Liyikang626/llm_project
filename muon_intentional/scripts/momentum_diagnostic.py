@@ -64,16 +64,16 @@ def summarize(rows, tolerance):
                 gain_vs_best_fixed=float(gain_vs_slow - max(0.0, b.mean())))
 
 
-def train(cfg, spec, steps, observe, emit):
+def train(cfg, spec, steps, observe, emit, *, momentum_schedule=None):
     torch.use_deterministic_algorithms(True)
     torch.manual_seed(cfg.seed)
     model = build_model(cfg, "cuda")
     opt = build_optimizer(model, cfg)
     batcher = TokenBatcher(cfg.data_path, cfg.batch_size, cfg.seq_len, cfg.seed,
                            spec["data"]["validation_fraction"])
-    pc = spec["probe"]
     group = opt.param_groups[0]
     if observe:
+        pc = spec["probe"]
         fast = [torch.zeros_like(p) for p in group["params"]]
         names = {p: name for name, p in model.named_parameters()}
         probe_streams = {
@@ -104,6 +104,12 @@ def train(cfg, spec, steps, observe, emit):
                 rows.append(result)
                 record.update(result, margin_a=result["slow_a"] - result["fast_a"],
                               margin_b=result["slow_b"] - result["fast_b"])
+        if momentum_schedule is not None:
+            boundary = momentum_schedule["initial_steps"]
+            group["momentum"] = (momentum_schedule["initial_beta"] if step <= boundary
+                                 else momentum_schedule["final_beta"])
+            if step in (1, boundary, boundary + 1):
+                record["momentum"] = group["momentum"]
         opt.step()
         if step % cfg.eval_every == 0 or step == steps:
             record.update(evaluate(model, batcher))
@@ -111,6 +117,8 @@ def train(cfg, spec, steps, observe, emit):
             tokens = step * cfg.batch_size * cfg.seq_len
             record.update(train_loss=loss.item(), grad_norm=grad_norm.item(), lr=group["lr"],
                           tokens=tokens, tokens_per_sec=tokens / (time.monotonic() - start))
+            if momentum_schedule is not None:
+                record["momentum"] = group["momentum"]
             emit(step, record)
     return model, rows
 
