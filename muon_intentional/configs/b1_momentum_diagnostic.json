@@ -1,0 +1,20 @@
+{
+  "name": "b1-momentum-diagnostic-seed0",
+  "training": {
+    "opt_mode": "muon", "lr": 0.01, "momentum": 0.95, "nesterov": true,
+    "adam_lr": 0.0003, "weight_decay": 0.0,
+    "n_layer": 6, "n_head": 6, "d_model": 384, "seq_len": 512,
+    "batch_size": 32, "tokens": 15000000, "seed": 0,
+    "warmup_frac": 0.02, "lr_schedule": "cosine", "eval_every": 500, "log_every": 50
+  },
+  "probe": {
+    "fast_beta": 0.8, "every": 20, "batch_size": 8, "seed_a": 7101, "seed_b": 7102,
+    "tie_tolerance": 0.000001
+  },
+  "data": {
+    "path": "~/storage/llm_project/data/climbmix_400m.u16",
+    "source": "/mnt/oss/datasets/climbmix/part_0.tokenized.jsonl",
+    "cache_tokens": 400000000, "validation_fraction": 0.01, "tokenizer": "GPT-2"
+  },
+  "output": "~/storage/llm_project/momentum_diagnostic"
+}
